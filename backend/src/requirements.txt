@@ -1,3 +1,9 @@
 Flask==2.3.2
 pymongo==4.3.3
 openai==0.27.8
+python-dotenv==1.0.0
+requests==2.31.0
+# Optional dependencies
+gunicorn==20.1.0
+flask-cors==4.0.0
+pytest==7.4.2
