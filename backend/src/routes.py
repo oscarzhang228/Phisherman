@@ -21,7 +21,7 @@ def get_all_employees():
     employees = Employee.collection.find({})
     employee_list = []
     for emp in employees:
-        emp["emp_id"] = str(emp["emp_id"])  # Convert ObjectId to string
+        emp["_id"] = str(emp["_id"])  # Convert ObjectId to string
         employee_list.append(emp)
     return jsonify(employee_list)
 
@@ -58,7 +58,6 @@ def test_Credentials():
 # endregion
 
 # region LOGS DB Routes
-
 @main_routes.route("/logs", methods=["GET"])
 def get_all_logs():
     """Fetch all logs and return them as JSON."""
