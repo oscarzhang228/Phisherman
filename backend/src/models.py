@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 # Replace <db_password> with your actual password
-MONGO_URI = "mongodb+srv://jamesywang88:<db_password>@cluster0.q7a3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_URI = "mongodb+srv://jamesywang88:pizza123@cluster0.q7a3k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 # Initialize the MongoDB client
 client = MongoClient(MONGO_URI)

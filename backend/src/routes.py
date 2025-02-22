@@ -12,16 +12,19 @@ def get_all_employees():
     employees = Employee.collection.find({})
     employee_list = []
     for emp in employees:
-        emp["_id"] = str(emp["_id"])  # Convert ObjectId to string
+        emp["emp_id"] = str(emp["emp_id"])  # Convert ObjectId to string
         employee_list.append(emp)
     return jsonify(employee_list)
 
 @main_routes.route("/employees", methods=["POST"])
 def add_employee():
     """Add a new employee to the database."""
-    data = request.json  # Get data from request body
-    emp_id = Employee.add(data["name"], data["emp_id"], data["phone"], data["email"], data["position"])
-    return jsonify({"message": "Employee added", "id": str(emp_id)}), 201
+    try:
+        data = request.json  # Get data from request body
+        emp_id = Employee.add(data["name"], data["emp_id"], data["phone"], data["email"], data["position"])
+        return jsonify({"message": "Employee added", "id": str(emp_id)}), 201
+    except Exception as e:
+        return jsonify({"message": e}), 501
 
 @main_routes.route("/employees/<row_id>", methods=["DELETE"])
 def delete_employee(row_id):
