@@ -1,7 +1,3 @@
-"use client";
-import React from "react";
-
-
 const PhishermanContent = () => {
   return (
     <div className="flex flex-col w-screen min-h-screen bg-[#0a0a0a] font-['Space_Grotesk'] text-white overflow-x-hidden">
@@ -142,82 +138,6 @@ const PhishermanContent = () => {
           </div>
         </div>
       </section>
-
-      <footer className="py-12 border-t border-white/10">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-[#ff4800] to-[#ff8400] bg-clip-text text-transparent mb-4">
-                Phisherman
-              </div>
-              <p className="text-white/70">
-                Protecting your organization from phishing attacks with
-                AI-powered security training.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Product</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Features
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Pricing
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Security
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Blog
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">Legal</h4>
-              <ul className="space-y-2 text-white/70">
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Privacy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Terms
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white">
-                    Security
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
