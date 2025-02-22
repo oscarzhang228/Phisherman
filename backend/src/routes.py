@@ -22,8 +22,9 @@ def get_all_employees():
     employee_list = []
     for emp in employees:
         emp["_id"] = str(emp["_id"])  # Convert ObjectId to string
+        print(emp)
         employee_list.append(emp)
-    return jsonify(employee_list)
+    return employee_list
 
 @main_routes.route("/employees", methods=["POST"])
 def add_employee():

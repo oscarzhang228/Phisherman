@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import { DashboardCard } from "./DashboardCard";
 import { NotificationItem } from "./NotificationItem";
+import Link from "next/link";
 
 interface PhishermanHeroProps {
   threats: number;
@@ -31,9 +32,11 @@ export const PhishermanHero: React.FC<PhishermanHeroProps> = ({
                 test and train employees before real hackers strike.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-6 mt-8">
-                <Button variant="primary" icon="lightning">
-                  Get Started
-                </Button>
+                <Link href={"/attack"}>
+                  <Button variant="primary" icon="lightning">
+                    Get Started
+                  </Button>
+                </Link>
                 <Button variant="secondary" icon="play">
                   Watch Demo
                 </Button>
