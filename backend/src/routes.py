@@ -57,7 +57,7 @@ def test_Credentials():
         return jsonify({"error": e})
 # endregion
 
-# region Logs DB Routes
+# region LOGS DB Routes
 @main_routes.route("/logs", methods=["GET"])
 def get_all_logs():
     """Fetch all logs and return them as JSON."""
