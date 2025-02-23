@@ -35,6 +35,10 @@ class Employee:
     @staticmethod
     def add(name, employee_id, phone, email, position, manager_email=None):
         try:
+            existing_employee = Employee.collection.find_one({"employee_id": employee_id})
+            if existing_employee:
+                raise ValueError(f"Employee ID {employee_id} already exists in database.")
+            
             row = {
                 "name": name,
                 "employee_id": employee_id,
@@ -46,6 +50,7 @@ class Employee:
             result = Employee.collection.insert_one(row)
             print("Added employee with _id:", result.inserted_id)
             return employee_id  # Return the provided employee_id
+        
         except Exception as e:
             raise ValueError(f"Failed to add employee: {e}")
 
