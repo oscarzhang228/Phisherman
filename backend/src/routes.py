@@ -5,10 +5,21 @@ from email.mime.text import MIMEText
 import requests
 from bson.objectid import ObjectId
 from models import Employee, Log
+from retell import Retell
+import os
+import dotenv
 
 main_routes = Blueprint("main_routes", __name__)
 
 # --- Helper Functions ---
+
+def send_call():
+    client = Retell(api_key = os.getenv("RETELL_API_KEY"))
+    phone_call_response = client.call.create_phone_call(
+    from_number="+18559482251",
+    to_number="+12409607789", 
+    )
+    print(phone_call_response.agent_id)
 
 def parse_report(report):
     """
@@ -112,7 +123,7 @@ def call_webhook(data):
         print("Error calling webhook:", e)
         # Optionally log or handle the error further.
 
-# --- Employee Routes ---
+# region --- Employee Routes ---
 
 @main_routes.route("/employee", methods=["GET"])
 def get_employee():
@@ -162,8 +173,9 @@ def delete_employee_route(emp_id):
         return jsonify({"message": "Employee deleted", "deleted_count": deleted_count})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+# endregion
 
-# --- Logs Routes ---
+# region --- Logs Routes ---
 
 @main_routes.route("/logs", methods=["GET"])
 def get_all_logs():
@@ -254,8 +266,9 @@ def track_response():
         return jsonify({"message": "Report processed successfully"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+# endregion
 
-# --- Analytics Endpoints ---
+# region --- Analytics Endpoints ---
 
 @main_routes.route("/analytics/passRate", methods=["GET"])
 def get_pass_rate():
@@ -308,3 +321,4 @@ def get_weaknesses():
         return jsonify(weaknesses)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+#endregion
