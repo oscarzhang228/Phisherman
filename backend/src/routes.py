@@ -13,17 +13,27 @@ main_routes = Blueprint("main_routes", __name__)
 
 # --- Helper Functions ---
 
+@main_routes.route("/sendCall", methods=["GET"])
 async def send_call():
     retell_client = Retell(
         api_key = os.getenv("RETELL_API_KEY")
     )
 
     try:
+        data = request.json
+        employee = Employee.fetch(data["emp_id"])
+        if not employee:
+            return jsonify({"error": "Employee not found"}), 404
+
         response = await retell_client.call.create_phone_call(
-            from_number="+INSERT_NUMBER",
+            from_number= employee["phone"],
             to_number="+INSERT_NUMBER"
         )
-        return response # Figure out what a response is??
+
+        # @Xtreme please add AI to database functionality here -------------------------------------
+        transcript = response.transcript
+        sentiment = response.user_sentiment
+
     except Exception as e:
         print(f"Error making call: {e}")
 
