@@ -3,9 +3,13 @@ import { Employee } from "./types";
 
 interface EmployeeCardProps {
   employee: Employee;
+  onCampaignLaunch: (employee_id: string) => void;
 }
 
-const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
+const EmployeeCard: React.FC<EmployeeCardProps> = ({
+  employee,
+  onCampaignLaunch,
+}) => {
   return (
     <div className="group bg-[#151515] rounded-xl p-6 border-2 border-transparent hover:border-orange-500/30 transition-all duration-300">
       <div className="flex flex-col h-full">
@@ -29,13 +33,12 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
             Manager: {employee.manager_email}
           </p>
         </div>
-        <div className="mt-6">
-          <a href={`/launch/${employee.employee_id}`} className="block w-full">
-            <button className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transform transition-all duration-300 shadow-lg shadow-orange-500/20 font-medium">
-              Launch Campaign
-            </button>
-          </a>
-        </div>
+        <button
+          onClick={() => onCampaignLaunch(employee.employee_id)}
+          className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transform transition-all duration-300 shadow-lg shadow-orange-500/20 font-medium"
+        >
+          Launch Campaign
+        </button>
       </div>
     </div>
   );

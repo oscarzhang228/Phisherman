@@ -14,14 +14,14 @@ main_routes = Blueprint("main_routes", __name__)
 # --- Helper Functions ---
 
 @main_routes.route("/sendCall", methods=["GET"])
-async def send_call():
+def send_call():
     retell_client = Retell(
         api_key = os.getenv("RETELL_API_KEY")
     )
 
     try:
-        data = request.json
-        employee = Employee.fetch(data["emp_id"])
+        employee_id = request.args.get("employee_id")
+        employee = Employee.fetch(employee_id)
         if not employee:
             return jsonify({"error": "Employee not found"}), 404
 
@@ -34,7 +34,7 @@ async def send_call():
         sentiment = response.call_analysis.call_successful
         summary = response.call_analysis.call_summary
         
-        return jsonify({"Employee": employee["emp_id"], "Pass/Fail": sentiment})
+        return jsonify({"Employee": employee["emp_id"], "Pass/Fail": sentiment, "Summary": summary, "Transcipt": transcript})
 
     except Exception as e:
         print(f"Error making call: {e}")

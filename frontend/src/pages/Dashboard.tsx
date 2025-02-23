@@ -58,6 +58,14 @@ export default function Dashboard() {
     fetchEmployees();
   }, []);
 
+  const onCampaignLaunch = async (employeeId: string) => {
+    const campaignResults = await fetch(
+      SERVER_URL + "/sendCall" + "?employee_id=" + employeeId,
+    );
+
+    console.log(await campaignResults.json());
+  };
+
   const matchedEmployees = employees.filter((employee) => {
     return (
       searchTerm === "" || employee.name.toLowerCase().includes(searchTerm)
@@ -83,7 +91,11 @@ export default function Dashboard() {
           <SearchBar onChange={setSearchTerm} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {matchedEmployees.map((employee) => (
-              <EmployeeCard key={employee.employee_id} employee={employee} />
+              <EmployeeCard
+                key={employee.employee_id}
+                employee={employee}
+                onCampaignLaunch={onCampaignLaunch}
+              />
             ))}
           </div>
         </div>
