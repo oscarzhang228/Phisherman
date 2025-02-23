@@ -13,13 +13,19 @@ main_routes = Blueprint("main_routes", __name__)
 
 # --- Helper Functions ---
 
-def send_call():
-    client = Retell(api_key = os.getenv("RETELL_API_KEY"))
-    phone_call_response = client.call.create_phone_call(
-    from_number="+18559482251",
-    to_number="+12409607789", 
+async def send_call():
+    retell_client = Retell(
+        api_key = os.getenv("RETELL_API_KEY")
     )
-    print(phone_call_response.agent_id)
+
+    try:
+        response = await retell_client.call.create_phone_call(
+            from_number="+INSERT_NUMBER",
+            to_number="+INSERT_NUMBER"
+        )
+        return response # Figure out what a response is??
+    except Exception as e:
+        print(f"Error making call: {e}")
 
 def parse_report(report):
     """
