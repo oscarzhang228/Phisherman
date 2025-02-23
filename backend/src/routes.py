@@ -25,14 +25,16 @@ async def send_call():
         if not employee:
             return jsonify({"error": "Employee not found"}), 404
 
-        response = await retell_client.call.create_phone_call(
-            from_number= employee["phone"],
-            to_number="+INSERT_NUMBER"
+        response = retell_client.call.create_phone_call(
+            from_number="+18559482251" ,
+            to_number=employee["phone"]
         )
 
-        # @Xtreme please add AI to database functionality here -------------------------------------
         transcript = response.transcript
-        sentiment = response.user_sentiment
+        sentiment = response.call_analysis.call_successful
+        summary = response.call_analysis.call_summary
+        
+        return jsonify({"Employee": employee["emp_id"], "Pass/Fail": sentiment})
 
     except Exception as e:
         print(f"Error making call: {e}")
