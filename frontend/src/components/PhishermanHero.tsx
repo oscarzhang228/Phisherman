@@ -32,7 +32,7 @@ export const PhishermanHero: React.FC<PhishermanHeroProps> = ({
                 test and train employees before real hackers strike.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-6 mt-8">
-                <Link to={"/attack"} className="text-white">
+                <Link to={"/dashboard"} className="text-white">
                   <Button variant="primary" icon="lightning">
                     Get Started
                   </Button>

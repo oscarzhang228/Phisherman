@@ -3,7 +3,7 @@ import { PhishermanHero } from "../components/PhishermanHero";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white max-w-screen overflow-hidden">
+    <main className="text-white max-w-screen overflow-hidden">
       {/* Hero Section with Grid Background */}
       <PhishermanHero threats={15} successRate={79} />
 
