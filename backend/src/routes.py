@@ -8,6 +8,7 @@ from models import Employee, Log
 from retell import Retell
 import os
 import dotenv
+import asyncio
 
 main_routes = Blueprint("main_routes", __name__)
 
@@ -25,8 +26,10 @@ async def send_call():
         if not employee:
             return jsonify({"error": "Employee not found"}), 404
 
-        response = retell_client.call.create_phone_call(
-            from_number="+18559482251" ,
+        # Run the synchronous create_phone_call in a thread
+        response = await asyncio.to_thread(
+            retell_client.call.create_phone_call,
+            from_number="+18559482251",
             to_number=employee["phone"]
         )
 
