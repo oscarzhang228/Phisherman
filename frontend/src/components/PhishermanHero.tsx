@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "./Button";
 import { DashboardCard } from "./DashboardCard";
 import { NotificationItem } from "./NotificationItem";
+import { Link } from "react-router-dom";
 
 interface PhishermanHeroProps {
   threats: number;
@@ -22,7 +23,7 @@ export const PhishermanHero: React.FC<PhishermanHeroProps> = ({
                 className="text-7xl md:text-9xl font-bold glitch-text"
                 data-text="Phisherman"
               >
-                <span className="bg-gradient-to-r from-[#ff4800] to-[#ff8400] bg-clip-text text-transparent inline-block transform hover:scale-105 transition-transform duration-300">
+                <span className="bg-gradient-to-r from-[#ff4800] to-[#ff8400] bg-clip-text text-transparent inline-block transform hover:scale-105 transition-transform duration-300 text-[8rem] ">
                   Phisherman
                 </span>
               </h1>
@@ -31,12 +32,11 @@ export const PhishermanHero: React.FC<PhishermanHeroProps> = ({
                 test and train employees before real hackers strike.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-6 mt-8">
-                <Button variant="primary" icon="lightning">
-                  Get Started
-                </Button>
-                <Button variant="secondary" icon="play">
-                  Watch Demo
-                </Button>
+                <Link to={"/dashboard"} className="text-white">
+                  <Button variant="primary" icon="lightning">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="max-w-2xl mx-auto mt-8">
