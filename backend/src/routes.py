@@ -25,7 +25,7 @@ async def send_call():
         if not employee:
             return jsonify({"error": "Employee not found"}), 404
 
-        response = await retell_client.call.create_phone_call(
+        response = retell_client.call.create_phone_call(
             from_number="+18559482251" ,
             to_number=employee["phone"]
         )
