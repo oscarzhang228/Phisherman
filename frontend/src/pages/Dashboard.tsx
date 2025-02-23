@@ -8,6 +8,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import SearchBar from "@/components/EmployeeSelection/SearchBar";
+import EmployeeCard from "@/components/EmployeeSelection/EmployeeCard";
+import { Link } from "react-router-dom";
 
 type Employee = {
   name: string;
@@ -15,6 +18,7 @@ type Employee = {
   phone: string;
   email: string;
   position: string;
+  manager_email: string;
 };
 
 const employee: Employee = {
@@ -23,17 +27,23 @@ const employee: Employee = {
   phone: "4712678565",
   email: "jameswang@mcdonalds.com",
   position: "fry cook",
+  manager_email: "email",
+};
+
+const employee2: Employee = {
+  name: "Vic Wang",
+  emp_id: "13",
+  phone: "123",
+  email: "vicwang@bking.com",
+  position: "senior burger maker",
+  manager_email: "email2",
 };
 
 const SERVER_URL = "http://localhost:5000";
 export default function Dashboard() {
-  const [employees, setEmployees] = useState<Employee[]>([
-    employee,
-    employee,
-    employee,
-  ]);
+  const [employees, setEmployees] = useState<Employee[]>([employee, employee2]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const [selectedEmployeeIdx, setSelectedEmployeeIdx] = useState<number>(0);
   const fetchEmployees = async () => {
     const employeeData = await fetch(SERVER_URL + "/employees");
 
@@ -43,41 +53,36 @@ export default function Dashboard() {
     fetchEmployees();
   }, []);
 
+  const matchedEmployees = employees.filter((employee) => {
+    return (
+      searchTerm === "" || employee.name.toLowerCase().includes(searchTerm)
+    );
+  });
   return (
-    <div className="bg-[#0a0a0a] px-[8rem] py-5 min-h-screen overflow-hidden max-w-screen">
-      <Table className="min-w-full divide-y divide-gray-200">
-        <TableHeader className=" bg-gray-50">
-          <TableRow className="text-white">
-            {Object.keys(employee).map((empKey) => {
-              return (
-                <TableHead className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  {empKey}
-                </TableHead>
-              );
-            })}
-          </TableRow>
-        </TableHeader>
-        <TableBody className="bg-white divide-y divide-gray-200">
-          {employees.map((employee, idx) => {
-            return (
-              <TableRow
-                className={"font-[Space Grotesk] px-6 py-4 whitespace-nowrap" + }
-                onClick={() => {
-                  setSelectedEmployeeIdx(idx);
-                }}
-              >
-                {Object.values(employee).map((empVal) => {
-                  return (
-                    <TableCell className={"font-[Space Grotesk] px-6 py-5"}>
-                      {empVal}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+    <div className="min-h-screen w-full bg-[#0a0a0a] font-[Space Grotesk] text-white px-4 py-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-12">
+          <div className="text-4xl font-bold bg-gradient-to-r from-orange-500 to-red-600 text-transparent bg-clip-text">
+            <Link to="/">Phisherman</Link>
+          </div>
+        </div>
+        <div className="flex flex-col gap-8">
+          <div className="flex flex-col items-center gap-4">
+            <h1 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">
+              Select your target
+            </h1>
+            <p className="text-gray-400 text-center text-lg">
+              Choose an employee to run a phishing awareness test
+            </p>
+          </div>
+          <SearchBar onChange={setSearchTerm} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {matchedEmployees.map((employee) => (
+              <EmployeeCard key={employee.emp_id} employee={employee} />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
