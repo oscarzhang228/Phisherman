@@ -26,8 +26,8 @@ async def send_call():
             return jsonify({"error": "Employee not found"}), 404
 
         response = await retell_client.call.create_phone_call(
-            from_number= employee["phone"],
-            to_number="+INSERT_NUMBER"
+            from_number="+18559482251" ,
+            to_number=employee["phone"]
         )
 
         # @Xtreme please add AI to database functionality here -------------------------------------
