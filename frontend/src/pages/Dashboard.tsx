@@ -11,43 +11,48 @@ import {
 import SearchBar from "@/components/EmployeeSelection/SearchBar";
 import EmployeeCard from "@/components/EmployeeSelection/EmployeeCard";
 import { Link } from "react-router-dom";
-
-type Employee = {
-  name: string;
-  emp_id: string;
-  phone: string;
-  email: string;
-  position: string;
-  manager_email: string;
-};
+import { Employee } from "@/components/EmployeeSelection/types";
 
 const employee: Employee = {
   name: "James Wang",
-  emp_id: "12",
-  phone: "4712678565",
+  employee_id: "12",
+  phone: "123-456-789",
   email: "jameswang@mcdonalds.com",
   position: "fry cook",
-  manager_email: "email",
+  manager_email: "email@gmail.com",
 };
 
 const employee2: Employee = {
   name: "Vic Wang",
-  emp_id: "13",
-  phone: "123",
+  employee_id: "13",
+  phone: "123-456-789",
   email: "vicwang@bking.com",
   position: "senior burger maker",
-  manager_email: "email2",
+  manager_email: "email2@gmail.com",
+};
+
+const employee3: Employee = {
+  name: "Oscar Zhang",
+  employee_id: "14",
+  phone: "123-456-789",
+  email: "ozhang@wendys.com",
+  position: "baconator taster",
+  manager_email: "email3@gmail.com",
 };
 
 const SERVER_URL = "http://localhost:5000";
 export default function Dashboard() {
-  const [employees, setEmployees] = useState<Employee[]>([employee, employee2]);
+  const [employees, setEmployees] = useState<Employee[]>([
+    employee,
+    employee2,
+    employee3,
+  ]);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   const fetchEmployees = async () => {
     const employeeData = await fetch(SERVER_URL + "/employees");
 
-    // setEmployees(await employeeData.json());
+    setEmployees(await employeeData.json());
   };
   useEffect(() => {
     fetchEmployees();
@@ -78,7 +83,7 @@ export default function Dashboard() {
           <SearchBar onChange={setSearchTerm} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {matchedEmployees.map((employee) => (
-              <EmployeeCard key={employee.emp_id} employee={employee} />
+              <EmployeeCard key={employee.employee_id} employee={employee} />
             ))}
           </div>
         </div>

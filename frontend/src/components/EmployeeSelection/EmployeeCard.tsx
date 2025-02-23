@@ -14,7 +14,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
             {employee.name}
           </h3>
           <span className="bg-orange-500/10 rounded-full px-3 py-1 text-orange-500 text-sm">
-            {employee.emp_id}
+            {employee.employee_id}
           </span>
         </div>
         <div className="mt-4 space-y-2">
@@ -30,7 +30,7 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ employee }) => {
           </p>
         </div>
         <div className="mt-6">
-          <a href={`/launch/${employee.emp_id}`} className="block w-full">
+          <a href={`/launch/${employee.employee_id}`} className="block w-full">
             <button className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transform transition-all duration-300 shadow-lg shadow-orange-500/20 font-medium">
               Launch Campaign
             </button>
