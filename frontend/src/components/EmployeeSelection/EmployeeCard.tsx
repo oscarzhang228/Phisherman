@@ -1,5 +1,15 @@
 import React from "react";
 import { Employee } from "./types";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface EmployeeCardProps {
   employee: Employee;
@@ -33,12 +43,40 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({
             Manager: {employee.manager_email}
           </p>
         </div>
-        <button
-          onClick={() => onCampaignLaunch(employee.employee_id)}
-          className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transform transition-all duration-300 shadow-lg shadow-orange-500/20 font-medium"
-        >
-          Launch Campaign
-        </button>
+        <Dialog>
+          <DialogTrigger className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-xl hover:opacity-90 active:scale-95 transform transition-all duration-300 shadow-lg shadow-orange-500/20 font-medium">
+            Launch Campaign
+          </DialogTrigger>
+          <DialogContent className="lg:max-w-screen-lg left-[23%] top-[40%] overflow-hidden max-h-screen">
+            <DialogHeader>
+              <DialogTitle>Customize Campaign</DialogTitle>
+              <DialogDescription>
+                Insert a custom prompt in order to customize the type of
+                simulation.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex gap-2">
+              <label htmlFor="name" className="text-right">
+                Simulation Prompt
+              </label>
+              <input
+                id="name"
+                placeholder="Enter Prompt Here"
+                className="w-[90%]"
+              />
+            </div>
+            <DialogFooter className="bg-white">
+              <DialogClose asChild>
+                <button
+                  className="!bg-white border-3 !border-black rounded-xl"
+                  onClick={() => onCampaignLaunch(employee.employee_id)}
+                >
+                  Launch Campaign
+                </button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
